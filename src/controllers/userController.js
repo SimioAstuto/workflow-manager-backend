@@ -38,9 +38,19 @@ const updateEmail = async (req, res) => {
   }
 };
 
+const deleteAccount = async (req, res) => {
+  try {
+    await userService.deleteAccount(req.user.userId);
+    res.status(200).json({ message: 'Cuenta eliminada correctamente' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   register,
   login,
   updatePassword,
-  updateEmail
+  updateEmail,
+  deleteAccount
 };

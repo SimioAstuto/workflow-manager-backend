@@ -1,4 +1,6 @@
 const User = require('../models/userModel');
+const Category = require('../models/categoryModel');
+const Product = require('../models/productModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -50,9 +52,19 @@ const updateEmail = async (userId, newEmail) => {
   return { message: 'Correo actualizado correctamente', email: user.email };
 };
 
+const deleteAccount = async (userId) => {
+  const categories = await Category.find({ owner: userId });
+  const categoryIds = categories.map(cat => cat._id);
+
+  await Product.deleteMany({ category: { $in: categoryIds } });
+  await Category.deleteMany({ owner: userId });
+  await User.findByIdAndDelete(userId);
+};
+
 module.exports = {
   registerUser,
   loginUser,
   updatePassword,
-  updateEmail
+  updateEmail,
+  deleteAccount
 };
