@@ -30,7 +30,29 @@ const loginUser = async ({ email, password }) => {
   return { token };
 };
 
+const updatePassword = async (userId, currentPassword, newPassword) => {
+  const user = await User.findById(userId);
+  if (!user) throw new Error('Usuario no encontrado');
+
+  const isMatch = await bcrypt.compare(currentPassword, user.password);
+  if (!isMatch) throw new Error('Contraseña actual incorrecta');
+
+  user.password = newPassword;
+  await user.save();
+  return { message: 'Contraseña actualizada correctamente' };
+};
+
+const updateEmail = async (userId, newEmail) => {
+  const existing = await User.findOne({ email: newEmail });
+  if (existing) throw new Error('Ese correo ya está en uso');
+
+  const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
+  return { message: 'Correo actualizado correctamente', email: user.email };
+};
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  updatePassword,
+  updateEmail
 };

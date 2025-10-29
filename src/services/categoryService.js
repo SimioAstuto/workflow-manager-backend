@@ -1,12 +1,16 @@
 const Category = require('../models/categoryModel');
 
-const createCategory = async (data) => {
-  const category = new Category(data);
+const createCategory = async (data, userId) => {
+  const category = new Category({
+    name: data.name,
+    description: data.description || '',
+    owner: userId
+  });
   return await category.save();
 };
 
-const getAllCategories = async () => {
-  return await Category.find();
+const getAllCategories = async (userId) => {
+  return await Category.find({ owner: userId });
 };
 
 const getCategoryById = async (id) => {

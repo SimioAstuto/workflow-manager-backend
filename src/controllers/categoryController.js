@@ -2,7 +2,7 @@ const categoryService = require('../services/categoryService');
 
 const createCategory = async (req, res) => {
   try {
-    const category = await categoryService.createCategory(req.body);
+    const category = await categoryService.createCategory(req.body, req.user.userId);
     res.status(201).json(category);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -11,7 +11,7 @@ const createCategory = async (req, res) => {
 
 const getAllCategories = async (req, res) => {
   try {
-    const categories = await categoryService.getAllCategories();
+    const categories = await categoryService.getAllCategories(req.user.userId);
     res.status(200).json(categories);
   } catch (error) {
     res.status(500).json({ error: error.message });

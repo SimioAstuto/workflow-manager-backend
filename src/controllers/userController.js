@@ -18,7 +18,29 @@ const login = async (req, res) => {
   }
 };
 
+const updatePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  try {
+    const result = await userService.updatePassword(req.user.userId, currentPassword, newPassword);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const updateEmail = async (req, res) => {
+  const { newEmail } = req.body;
+  try {
+    const result = await userService.updateEmail(req.user.userId, newEmail);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   register,
-  login
+  login,
+  updatePassword,
+  updateEmail
 };
