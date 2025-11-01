@@ -1,26 +1,79 @@
-# WorkFlow Manager Backend - API REST (Productos, Categorías y Usuarios)
+WorkFlow Manager Backend - API REST (Productos, Categorías y Usuarios)
 
-En este proyecto se desarrolló una API REST que permite manejar **Usuarios**, **Categorías** y **Productos**, implementando las operaciones básicas de **Crear, Leer, Actualizar y Eliminar (CRUD)**.
+Este proyecto corresponde al desarrollo de una API REST que permite gestionar **Usuarios**, **Categorías** y **Productos**, incluyendo las operaciones básicas de **Crear, Leer, Actualizar y Eliminar (CRUD)**.
 
-Los **Productos** están relacionados con las **Categorías**, por lo que al consultar productos también se muestra la información de la categoría correspondiente.
+Los **Productos** están asociados a una **Categoría**, por lo que al consultar productos se muestra la información completa de su categoría.  
+Además, se implementa **registro e inicio de sesión** para los usuarios. Las contraseñas se guardan en forma segura y al iniciar sesión se genera un **token JWT** que habilita el acceso a las acciones protegidas.
 
-El sistema incluye **registro e inicio de sesión de usuarios**. Las contraseñas se guardan de forma segura mediante **encriptación**, y al iniciar sesión se genera un **token (JWT)** que permite acceder a las zonas protegidas de la API, como crear o modificar productos y categorías.
-
-El proyecto está organizado en carpetas separadas para mantener el código claro y ordenado (modelos, controladores, rutas, conexión a la base de datos y middleware). Además, se utilizan **variables de entorno** para manejar datos sensibles como la conexión a la base de datos y la clave del token.
+---
 
 ## ✅ Funcionalidades Principales
 
 - CRUD de **Productos**
 - CRUD de **Categorías**
 - Registro e inicio de sesión de **Usuarios**
-- Encriptación de contraseñas
-- Seguridad mediante **JWT**
+- Encriptación de contraseñas (bcrypt)
+- Autenticación con **JWT**
 - Relación **Producto → Categoría**
-- Organización modular del código
+- Middleware para proteger rutas
+- Uso de variables de entorno
 
 ---
 
+## 🗂️ Esquema de la Base de Datos (MongoDB)
 
+### Usuarios (users)
+| Campo | Tipo | Descripción |
+|------|------|-------------|
+| name | String | Nombre del usuario |
+| email | String | Correo único para iniciar sesión |
+| password | String (hasheado) | Contraseña encriptada |
+
+### Categorías (categories)
+| Campo | Tipo | Descripción |
+|------|------|-------------|
+| name | String | Nombre de la categoría |
+| description | String | Descripción breve |
+
+### Productos (products)
+| Campo | Tipo | Descripción |
+|------|------|-------------|
+| name | String | Nombre del producto |
+| description | String | Descripción del producto |
+| price | Number | Precio |
+| stock | Number | Cantidad disponible en inventario |
+| category | ObjectId (ref: Category) | Categoría a la que pertenece |
+
+---
+
+## 📂 Estructura del Proyecto
+
+src/
+├── models/ # Modelos de MongoDB
+│ ├── userModel.js
+│ ├── productModel.js
+│ └── categoryModel.js
+│
+├── controllers/ # Manejan las peticiones HTTP
+│ ├── userController.js
+│ ├── productController.js
+│ └── categoryController.js
+│
+├── routes/ # Definición de rutas
+│ ├── userRoute.js
+│ ├── productRoute.js
+│ └── categoryRoute.js
+│
+├── middleware/
+│ └── verifyToken.js # Valida el token JWT
+│
+└── config/
+└── db.js # Conexión a MongoDB
+
+yaml
+Copiar código
+
+---
 
 ## ⚙️ Tecnologías Utilizadas
 
@@ -34,52 +87,54 @@ El proyecto está organizado en carpetas separadas para mantener el código clar
 
 ---
 
-## 🧩 Instalación y Ejecución
+## 🔧 Instalación y Ejecución
 
 1) Clonar el repositorio:
+```bash
+git clone <URL_DEL_REPO_BACKEND>
+Entrar a la carpeta del backend:
 
-git clone <URL_DEL_REPOSITORIO>
-
+bash
+Copiar código
 cd backend
 Instalar dependencias:
 
-
+bash
+Copiar código
 npm install
-Crear el archivo .env:
+Crear archivo .env en la raíz del proyecto:
 
-
+ini
+Copiar código
 PORT=5000
-MONGO_URI=TU_CONEXION_MONGO
-JWT_SECRET=TU_CLAVE_SECRETA
-Iniciar el servidor:
+MONGO_URI=TU_URL_DE_MONGO_AQUI
+JWT_SECRET=TU_CLAVE_SECRETA_AQUI
+Ejecutar el servidor:
 
-
+bash
+Copiar código
 npm start
-El backend quedará disponible en:
+El backend estará disponible en:
 
-
+arduino
+Copiar código
 http://localhost:5000
-
 🌐 Endpoints Disponibles
-
 🔐 Autenticación
-
-Método	Ruta	Descripción
+Método	Ruta	Acción
 POST	/api/users/register	Registrar usuario
 POST	/api/users/login	Iniciar sesión y obtener token
 
-📦 Productos (requiere token para crear/editar/eliminar)
-
-Método	Ruta	Descripción
+📦 Productos (Requiere token para crear, editar, eliminar)
+Método	Ruta	Acción
 GET	/api/products	Listar productos
 GET	/api/products/:id	Ver un producto
 POST	/api/products	Crear producto
 PUT	/api/products/:id	Editar producto
 DELETE	/api/products/:id	Eliminar producto
 
-🗂️ Categorías (requiere token para crear/editar/eliminar)
-
-Método	Ruta	Descripción
+🗂️ Categorías (Requiere token para crear, editar, eliminar)
+Método	Ruta	Acción
 GET	/api/categories	Listar categorías
 POST	/api/categories	Crear categoría
 PUT	/api/categories/:id	Editar categoría
