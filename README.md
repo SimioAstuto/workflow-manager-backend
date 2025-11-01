@@ -21,7 +21,7 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 ---
 
 ## 🗂️ Esquema de la Base de Datos (MongoDB)
-
+```
 ### Usuarios (users)
 | Campo | Tipo | Descripción |
 |------|------|-------------|
@@ -43,11 +43,33 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 | price | Number | Precio |
 | stock | Number | Cantidad disponible en inventario |
 | category | ObjectId (ref: Category) | Categoría a la que pertenece |
-
-
-
+```
+## 📂 Estructura del Proyecto
+```
+src/
+├── models/ # Modelos de MongoDB
+│ ├── userModel.js
+│ ├── productModel.js
+│ └── categoryModel.js
+│
+├── controllers/ # Manejan las peticiones HTTP
+│ ├── userController.js
+│ ├── productController.js
+│ └── categoryController.js
+│
+├── routes/ # Definición de rutas
+│ ├── userRoute.js
+│ ├── productRoute.js
+│ └── categoryRoute.js
+│
+├── middleware/
+│ └── verifyToken.js # Valida el token JWT
+│
+└── config/
+└── db.js # Conexión a MongoDB
+```
 ## ⚙️ Tecnologías Utilizadas
-
+---
 - Node.js
 - Express
 - MongoDB + Mongoose
@@ -61,7 +83,7 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 ## 🔧 Instalación y Ejecución
 
 1) Clonar el repositorio:
-```bash
+```
 git clone <URL_DEL_REPO_BACKEND>
 
 Entrar a la carpeta del backend:
@@ -86,58 +108,58 @@ El backend estará disponible en:
 
 
 http://localhost:5000
-
+```
 🌐 Endpoints Disponibles
 
 🔐 Autenticación
-
+```
 Método	Ruta	Acción
 POST	/api/users/register	Registrar usuario
 POST	/api/users/login	Iniciar sesión y obtener token
-
+```
 📦 Productos (Requiere token para crear, editar, eliminar)
-
+```
 Método	Ruta	Acción
 GET	/api/products	Listar productos
 GET	/api/products/:id	Ver un producto
 POST	/api/products	Crear producto
 PUT	/api/products/:id	Editar producto
 DELETE	/api/products/:id	Eliminar producto
-
+```
 🗂️ Categorías (Requiere token para crear, editar, eliminar)
-
+```
 Método	Ruta	Acción
 GET	/api/categories	Listar categorías
 POST	/api/categories	Crear categoría
 PUT	/api/categories/:id	Editar categoría
 DELETE	/api/categories/:id	Eliminar categoría
-
+```
 📄 Ejemplos de Datos (JSON)
-
-Crear Usuario
 ---
+Crear Usuario
+```
 {
   "name": "Juan Perez",
   "email": "juan@example.com",
   "password": "123456"
 }
-
+```
 Iniciar Sesión
----
+```
 {
   "email": "juan@example.com",
   "password": "123456"
 }
-
+```
 Crear Categoría (requiere token)
----
+```
 {
   "name": "Herramientas",
   "description": "Productos de uso mecánico"
 }
-
+```
 Crear Producto (requiere token)
----
+```
 {
   "name": "Martillo",
   "description": "Martillo de acero",
