@@ -21,8 +21,9 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 ---
 
 ## 🗂️ Esquema de la Base de Datos (MongoDB)
-```
+
 ### Usuarios (users)
+
 | Campo | Tipo | Descripción |
 |------|------|-------------|
 | name | String | Nombre del usuario |
@@ -30,12 +31,14 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 | password | String (hasheado) | Contraseña encriptada |
 
 ### Categorías (categories)
+
 | Campo | Tipo | Descripción |
 |------|------|-------------|
 | name | String | Nombre de la categoría |
 | description | String | Descripción breve |
 
 ### Productos (products)
+
 | Campo | Tipo | Descripción |
 |------|------|-------------|
 | name | String | Nombre del producto |
@@ -43,7 +46,7 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 | price | Number | Precio |
 | stock | Number | Cantidad disponible en inventario |
 | category | ObjectId (ref: Category) | Categoría a la que pertenece |
-```
+
 ## 📂 Estructura del Proyecto
 ```
 src/
@@ -82,7 +85,7 @@ src/
 
 ## 🔧 Instalación y Ejecución
 
-1) Clonar el repositorio:
+Clonar el repositorio:
 ```
 git clone <URL_DEL_REPO_BACKEND>
 
