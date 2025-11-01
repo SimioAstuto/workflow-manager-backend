@@ -1,4 +1,4 @@
-# Backend - API REST (Productos, Categorías y Usuarios)
+# WorkFlow Manager Backend - API REST (Productos, Categorías y Usuarios)
 
 En este proyecto se desarrolló una API REST que permite manejar **Usuarios**, **Categorías** y **Productos**, implementando las operaciones básicas de **Crear, Leer, Actualizar y Eliminar (CRUD)**.
 
