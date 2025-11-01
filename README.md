@@ -45,7 +45,6 @@ src/
      └── db.js            # Conexión a MongoDB
 
 
-
 ## ⚙️ Tecnologías Utilizadas
 
 - Node.js
