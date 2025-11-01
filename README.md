@@ -44,36 +44,7 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 | stock | Number | Cantidad disponible en inventario |
 | category | ObjectId (ref: Category) | Categoría a la que pertenece |
 
----
 
-## 📂 Estructura del Proyecto
-
-src/
-├── models/ # Modelos de MongoDB
-│ ├── userModel.js
-│ ├── productModel.js
-│ └── categoryModel.js
-│
-├── controllers/ # Manejan las peticiones HTTP
-│ ├── userController.js
-│ ├── productController.js
-│ └── categoryController.js
-│
-├── routes/ # Definición de rutas
-│ ├── userRoute.js
-│ ├── productRoute.js
-│ └── categoryRoute.js
-│
-├── middleware/
-│ └── verifyToken.js # Valida el token JWT
-│
-└── config/
-└── db.js # Conexión a MongoDB
-
-yaml
-Copiar código
-
----
 
 ## ⚙️ Tecnologías Utilizadas
 
