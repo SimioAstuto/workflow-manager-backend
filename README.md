@@ -88,29 +88,29 @@ DELETE	/api/categories/:id	Eliminar categoría
 📄 Ejemplos de Datos (JSON)
 
 Crear Usuario
-
+---
 {
   "name": "Juan Perez",
   "email": "juan@example.com",
   "password": "123456"
 }
----
-Iniciar Sesión
 
+Iniciar Sesión
+---
 {
   "email": "juan@example.com",
   "password": "123456"
 }
----
-Crear Categoría (requiere token)
 
+Crear Categoría (requiere token)
+---
 {
   "name": "Herramientas",
   "description": "Productos de uso mecánico"
 }
----
-Crear Producto (requiere token)
 
+Crear Producto (requiere token)
+---
 {
   "name": "Martillo",
   "description": "Martillo de acero",
