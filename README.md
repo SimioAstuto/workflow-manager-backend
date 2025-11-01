@@ -63,40 +63,40 @@ Además, se implementa **registro e inicio de sesión** para los usuarios. Las c
 1) Clonar el repositorio:
 ```bash
 git clone <URL_DEL_REPO_BACKEND>
+
 Entrar a la carpeta del backend:
 
-bash
-Copiar código
+
 cd backend
 Instalar dependencias:
 
-bash
-Copiar código
+
 npm install
 Crear archivo .env en la raíz del proyecto:
 
-ini
-Copiar código
+
 PORT=5000
 MONGO_URI=TU_URL_DE_MONGO_AQUI
 JWT_SECRET=TU_CLAVE_SECRETA_AQUI
 Ejecutar el servidor:
 
-bash
-Copiar código
+
 npm start
 El backend estará disponible en:
 
-arduino
-Copiar código
+
 http://localhost:5000
+
 🌐 Endpoints Disponibles
+
 🔐 Autenticación
+
 Método	Ruta	Acción
 POST	/api/users/register	Registrar usuario
 POST	/api/users/login	Iniciar sesión y obtener token
 
 📦 Productos (Requiere token para crear, editar, eliminar)
+
 Método	Ruta	Acción
 GET	/api/products	Listar productos
 GET	/api/products/:id	Ver un producto
@@ -105,6 +105,7 @@ PUT	/api/products/:id	Editar producto
 DELETE	/api/products/:id	Eliminar producto
 
 🗂️ Categorías (Requiere token para crear, editar, eliminar)
+
 Método	Ruta	Acción
 GET	/api/categories	Listar categorías
 POST	/api/categories	Crear categoría
